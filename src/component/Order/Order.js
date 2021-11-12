@@ -109,6 +109,7 @@ const Order = () => {
                   />
                   <label htmlFor="name"> Your address : </label>
                   <input
+                   required
                     type="text"
                     className="mb-2 py-1 px-3 disabled"
                     {...register("address")}
@@ -116,12 +117,13 @@ const Order = () => {
                   <label htmlFor="date"> Date : </label>
                   <input
                     type="date"
+                    required
                     className="mb-2 py-1 px-3"
-                    defaultValue={product.name}
                     {...register("date")}
                   />
                   <label htmlFor="name"> Your number : </label>
                   <input
+                   required
                     type="tel"
                     placeholder="Your Number *"
                     className="mb-2 py-1 px-3"

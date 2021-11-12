@@ -20,8 +20,8 @@ const AddProducts = () => {
       });
   };
   return (
-   <div className='p-2'>
-      <div className="container p-4 text-success rounded" style={{backgroundColor:"#454545"}}>
+   <div className='px-2'>
+      <div className="container p-3  text-success rounded" style={{backgroundColor:"#454545"}}>
       <h1 className="text-center text-primary"> Add Products </h1>
       <hr className="w-50 mx-auto" />
       <form className='d-flex flex-column  mx-auto' onSubmit={handleSubmit(onSubmit)}>
@@ -36,7 +36,7 @@ const AddProducts = () => {
 
         <label htmlFor="name">  Product description :</label>
         <textarea className='p-2 border-0 rounded bg-secondary' style={{outline: 0}} {...register("describiton")} required />
-        <input type="submit" className="btn mt-3 btn-primary" value="Add Add Product" />
+        <input type="submit" className="btn mt-3 btn-primary" value="Add Product" />
       </form>
     </div>
    </div>

@@ -1,0 +1,12 @@
+.banner-footer-container {
+  margin-top: -60px;
+}
+
+
+
+@media only screen and (max-width: 560px) {
+  .banner-footer-container {
+    margin-top: 60px;
+  }
+  
+}

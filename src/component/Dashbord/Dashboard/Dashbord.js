@@ -3,25 +3,15 @@ import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
-import { padding } from '@mui/system';
 import {
-  BrowserRouter as Router,
-  Switch,
+   Switch,
   Route,
-  useParams,
   useRouteMatch
 } from "react-router-dom";
 import Pay from '../UserDashBoard/Pay/Pay';
@@ -36,10 +26,10 @@ import AdminRoute from '../AdminRoute/AdminRoute';
 import useAuth from '../../Hooks/useAuth';
 
 
-const drawerWidth = 200;
+const drawerWidth = 210;
 
 function Dashbord(props) {
-  const {user , isAdmin} = useAuth();
+  const {user , isAdmin , loading} = useAuth();
   let { path, url } = useRouteMatch();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -47,18 +37,25 @@ function Dashbord(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  const me = true;
   const drawer = (
     <div className='py-5' style={{backgroundColor: '#001a1a'}}>
       {
         isAdmin && user.email && <div>
-        <Link className='text-decoration-none fs-6 ms-2' to='/home'><i className="fas fa-angle-double-left"></i> Back to Home </Link>
+        <Link className='text-decoration-none fs-6 ms-2 ' to='/home'><i className="fas fa-angle-double-left"></i> Back to Home </Link>
          <hr className='text-white' />
-  
+         
+
          <Link 
           to={`${url}`}
-          className='fs-6 text-warning  text-decoration-none d-flex align-items-center ms-3'
+          className='fs-6 text-warning text-decoration-none d-flex align-items-center ms-3 mt-3'
+          > 
+         <i className="fas fa-th-list fs-3 me-3" style={{color: '#EC5D07'}}></i>
+         Manage All Orders
+          </Link>
+
+         <Link 
+          to={`${url}/addproduct`}
+          className='fs-6 text-warning mt-3  text-decoration-none d-flex align-items-center ms-3'
           > 
          <i className="fas fa-plus-square fs-3 me-3 text-success "></i>
          Add A Product
@@ -79,14 +76,7 @@ function Dashbord(props) {
          Manage Products
           </Link>
   
-         <Link 
-          to={`${url}/manageorders`}
-          className='fs-6 text-warning text-decoration-none d-flex align-items-center ms-3 mt-3'
-          > 
-         <i className="fas fa-th-list fs-3 me-3" style={{color: '#EC5D07'}}></i>
-         Manage All Orders
-          </Link>
-         <Link 
+          <Link 
           to={`${url}/managereview`}
           className='fs-6 text-warning text-decoration-none d-flex align-items-center ms-3 mt-3'
           > 
@@ -223,13 +213,18 @@ function Dashbord(props) {
            </div>
          }
 
-           {/* Admin Dash board */}
+        {/* Admin Dash board */}
 
       {
        isAdmin && user.email &&
         <div>
           <Switch>
-            <AdminRoute exact path={`${path}`}>
+
+          <AdminRoute exact path={`${path}`}>
+          <ManageOrder></ManageOrder>
+        </AdminRoute>
+
+            <AdminRoute  path={`${path}/addproduct`}>
           <AddProducts></AddProducts>
         </AdminRoute>
 
@@ -241,9 +236,6 @@ function Dashbord(props) {
           <ManageProducts></ManageProducts>
         </AdminRoute>
 
-        <AdminRoute path={`${path}/manageorders`}>
-          <ManageOrder></ManageOrder>
-        </AdminRoute>
 
         <AdminRoute path={`${path}/managereview`}>
           <ManageReview></ManageReview>

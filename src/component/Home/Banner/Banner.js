@@ -12,8 +12,8 @@ const Banner = () => {
       <div className="container bg-primary">
         <div className="d-flex justify-content-evenly align-items-center flex-column flex-lg-row">
           <div>
-            <h5> all-New design</h5>
-            <h1> Unlimit4ed style. Go for days </h1>
+            <h5> All-New design</h5>
+            <h1 className='my-3'> Unlimit4ed style. Go for days </h1>
             <button className="btn btn-danger"> Learn more</button>
             <div></div>
           </div>

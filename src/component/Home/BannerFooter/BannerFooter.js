@@ -1,4 +1,5 @@
 import React from "react";
+import '../Banner/Banner.css'
 
 const watch = [
   {
@@ -20,7 +21,7 @@ const watch = [
 
 const BannerFooter = () => {
   return (
-    <div className="container" style={{ marginTop: "-50px" }}>
+    <div className="container banner-footer-container">
       <div className="row">
         {watch.map((wt) => {
           return (

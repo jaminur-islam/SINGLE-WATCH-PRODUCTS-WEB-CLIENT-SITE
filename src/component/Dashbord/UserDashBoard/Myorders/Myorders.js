@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
+import OrderLIst from "../../../Shared/OrderList/OrderLIst";
 
 const Myorders = () => {
   const [orders , setOrders]=useState([])
@@ -11,7 +12,6 @@ const Myorders = () => {
         setOrders(result.data);
       });
   }, [user.email]);
-
 
   const cancelHandle = (id) =>{
     const isDelete = window.confirm('are you sure ?')
@@ -25,10 +25,10 @@ const Myorders = () => {
     }
   }
 
-  let num = 1;
+ let num = 1;
   return(
    <div>
-      <div className="table-responsive bg-dark p-5 mt-2" style={{marginTop: '-20px'}} >
+      <div className="table-responsive bg-dark pb-5" style={{marginTop: '-20px'}} >
     <table className="table caption-top container " style={{backgroundColor:"#75a3a3" , borderRadius: '5px'}}>
       <caption className="fs-4 text-white">Your order list </caption>
       <thead>
@@ -43,38 +43,12 @@ const Myorders = () => {
           <th scope="col"> Delete </th>
         </tr>
       </thead>
-      {orders?.map((order) => {
-        return (
-          <tbody key={order._id}>
-            <tr>
-              <th scope="row">{num++}</th>
-              <td>{order.name}</td>
-              <td>{order.email}</td>
-              <td>{order.productName}</td>
-              <td>{order.address}</td>
-              <td>{order.date}</td>
-              <td
-                className={
-                  order.status == "Approve" ? "text-success" : "text-primary"
-                }
-              >
-                {order.status}
-              </td>
-              <td>
-                {
-                   order.status == "Approve"? <button className='border-0 btn-primary '> Succeeded</button>: <button
-                   onClick={() => cancelHandle(order._id)}
-                   className="border-0 bg-danger text-white fs-6"
-                 >
-                   Cancel
-                 </button>
-                }
-               
-              </td>
-            </tr>
-          </tbody>
-        );
-      })}
+      {orders?.map((order) => <OrderLIst
+        key={order._id}
+        order={order}
+        num = {num++}
+        cancelHandle={cancelHandle}
+      > </OrderLIst> )}
     </table>
   </div>
    </div>
