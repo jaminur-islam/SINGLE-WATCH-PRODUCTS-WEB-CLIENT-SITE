@@ -1,5 +1,3 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
 import useProducts from "../../Hooks/useProducts";
 import Product from "../Product/Product";
 

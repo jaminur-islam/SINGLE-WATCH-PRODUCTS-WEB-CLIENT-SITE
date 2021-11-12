@@ -8,7 +8,7 @@ import './product.css'
 const Product = ({ product , button , order , setIsDelete }) => {
   const {user } = useAuth();
  
-  const { name, img, describiton, rating , _id } = product || {};
+  const { name, img, describiton, rating , _id , price } = product || {};
   const history = useHistory();
   const HandleOrder =(_id) =>{
       history.push(`/order/${_id}`)
@@ -32,6 +32,7 @@ const Product = ({ product , button , order , setIsDelete }) => {
       <div className='text-center p-lg-3 m-lg-3 my-3'>
         <img className='rounded' width='300' height='300' src={img} alt="" />
          <h5 className='text-success mt-2'>{name}</h5>
+         <h6 className='text-primary mt-2'> $ {price}</h6>
          <h6 style={{fontSize: '13px'}}>
             
               <Rating

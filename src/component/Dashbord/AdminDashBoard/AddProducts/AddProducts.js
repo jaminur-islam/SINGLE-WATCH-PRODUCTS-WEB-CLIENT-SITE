@@ -10,7 +10,7 @@ const AddProducts = () => {
   console.log(user);
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    data.rating = 1;
+    data.rating = 1.5;
     axios.post("https://fierce-escarpment-48100.herokuapp.com/products", data)
       .then((result) => {
         if (result.data.acknowledged) {
