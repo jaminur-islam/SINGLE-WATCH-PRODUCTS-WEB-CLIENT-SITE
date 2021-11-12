@@ -26,10 +26,10 @@ const BannerFooter = () => {
         {watch.map((wt) => {
           return (
             <div key={wt.id} className="col-lg-4">
-              <div className="d-flex align-items-center justify-content-evenly p-3 bg-success">
+              <div style={{backgroundColor: '#0A93BB'}} className="d-flex align-items-center justify-content-evenly p-3 my-lg-0 my-2  rounded">
                 <div>
-                  <span>BRAND NEW STYLE</span>
-                  <h4 className="w-75"> {wt.style}</h4>
+                  <span style={{color: '#8A02A2'}} className='fw-bold'>BRAND NEW STYLE</span>
+                  <h4 className="w-75 text-dark fw-normal"> {wt.style}</h4>
                 </div>
                 <img height="100" src={wt.img} alt="" />
               </div>

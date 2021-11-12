@@ -21,6 +21,7 @@ const useFirebase = () =>{
     setLoading(true);
     createUserWithEmailAndPassword(auth , email , pass)
     .then(result =>{
+      setError('')
       console.log(result)
       setUser({displayName: name , email: email })
       updateuser(name)
@@ -49,7 +50,7 @@ const useFirebase = () =>{
     .then(result =>{
       console.log(result)
       history.replace(locationis)
-      console.log(locationis)
+      setError('')
     })
     .catch(error =>{
       setError(error.message)
@@ -68,6 +69,7 @@ const useFirebase = () =>{
     .then(result =>{
       const user = result.user;
       setUserDatabase("PUT" , user.displayName, user.email);
+      setError('')
        history.push(locationis)
     }).catch(error => {
       setError(error.message)
@@ -105,7 +107,7 @@ const useFirebase = () =>{
 
     return ()=> unsubscrib
   } , [])
-  console.log(error)
+
 
   // Get admin api
   useEffect(()=>{
@@ -134,7 +136,7 @@ const useFirebase = () =>{
   }
 
   return {handleGoogleSign , 
-    user , logOut , loading ,signUp ,  logIn , isAdmin , token
+    user , logOut , loading ,signUp ,  logIn , isAdmin , token ,error 
   
   }
 }

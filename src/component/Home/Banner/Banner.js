@@ -6,14 +6,14 @@ const Banner = () => {
   return (
   <div>
       <div
-      className="bg-primary d-flex justify-content-center align-items-center"
-      style={{ height: "85vh" }}
+      className=" d-flex justify-content-center align-items-center"
+      style={{ height: "80vh" , backgroundColor: '#98C8B6' }}
     >
-      <div className="container bg-primary">
+      <div className="container bg-primary p-3 rounded banner-middle">
         <div className="d-flex justify-content-evenly align-items-center flex-column flex-lg-row">
           <div>
-            <h5> All-New design</h5>
-            <h1 className='my-3'> Unlimit4ed style. Go for days </h1>
+            <h5 className='text-uppercase text-white'> All-New design</h5>
+            <h1 className='my-3 text-uppercase w-75'> Unlimit4ed style. Go for days </h1>
             <button className="btn btn-danger"> Learn more</button>
             <div></div>
           </div>

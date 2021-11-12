@@ -2,6 +2,7 @@ import React from "react";
 import Navigation from "../../Shared/Navigation/Navigation";
 import Banner from "../Banner/Banner";
 import BannerFooter from "../BannerFooter/BannerFooter";
+import Footer from "../Footer/Footer";
 import Products from "../Products/Products";
 import Review from "../Review/Review";
 
@@ -16,6 +17,8 @@ const Home = () => {
       <BannerFooter></BannerFooter>
       <Products></Products>
       <Review></Review>
+      <Footer></Footer>
+      
     </div>
   );
 };
