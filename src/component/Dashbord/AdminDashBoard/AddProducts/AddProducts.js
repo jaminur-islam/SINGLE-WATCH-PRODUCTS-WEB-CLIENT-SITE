@@ -11,7 +11,7 @@ const AddProducts = () => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     data.rating = 1;
-    axios.post("http://localhost:5000/products", data)
+    axios.post("https://fierce-escarpment-48100.herokuapp.com/products", data)
       .then((result) => {
         if (result.data.acknowledged) {
           alert("successfully added");

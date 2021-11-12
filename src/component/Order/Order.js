@@ -15,7 +15,7 @@ const Order = () => {
   const [product, setProduct] = useState({});
   const { name, describiton, img, rating, _id } = product || {};
   useEffect(() => {
-    axios(`http://localhost:5000/products/${id}`).then((result) => {
+    axios(`https://fierce-escarpment-48100.herokuapp.com/products/${id}`).then((result) => {
       setProduct(result.data);
       reset({
         name: product.name,
@@ -27,7 +27,7 @@ const Order = () => {
     data.productId = _id;
     data.status = 'pending';
     console.log(data);
-    fetch("http://localhost:5000/order", {
+    fetch("https://fierce-escarpment-48100.herokuapp.com/order", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -7,7 +7,7 @@ const Myorders = () => {
   const [orders , setOrders]=useState([])
   const { user } = useAuth();
   useEffect(() => {
-    axios(`http://localhost:5000/order?email=${user.email}`)
+    axios(`https://fierce-escarpment-48100.herokuapp.com/order?email=${user.email}`)
       .then((result) => {
         setOrders(result.data);
       });
@@ -16,7 +16,7 @@ const Myorders = () => {
   const cancelHandle = (id) =>{
     const isDelete = window.confirm('are you sure ?')
     if(isDelete){
-      axios.delete(`http://localhost:5000/order/${id}`)
+      axios.delete(`https://fierce-escarpment-48100.herokuapp.com/order/${id}`)
     .then(result =>{
       const newOrders = orders.filter(order => order._id !== id);
       setOrders(newOrders)

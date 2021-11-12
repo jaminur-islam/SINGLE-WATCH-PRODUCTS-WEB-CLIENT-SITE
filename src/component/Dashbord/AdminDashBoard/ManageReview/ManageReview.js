@@ -5,14 +5,14 @@ import Allreview from '../../../Shared/Allreview/Allreview';
 const ManageReview = () => {
   const [reviews , setReviews] = useState([])
   useEffect(()=>{
-    axios.get('http://localhost:5000/review')
+    axios.get('https://fierce-escarpment-48100.herokuapp.com/review')
     .then(result =>{
       setReviews(result.data)
     })
   } , [])
  
   const handleDeleteReview =(id)=>{
-    fetch(`http://localhost:5000/review/${id}` , {
+    fetch(`https://fierce-escarpment-48100.herokuapp.com/review/${id}` , {
       method: 'DELETE',
       headers: {
         'content-type' : 'application/json'

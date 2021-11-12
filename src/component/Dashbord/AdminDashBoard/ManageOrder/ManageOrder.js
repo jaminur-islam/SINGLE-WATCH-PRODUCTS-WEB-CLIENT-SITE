@@ -9,7 +9,7 @@ const ManageOrder = () => {
   const [isApprove , setIsApprove] = useState(false);
   const [orders , setOrders] = useState([]);
   useEffect(()=>{
-    axios(`http://localhost:5000/order`)
+    axios(`https://fierce-escarpment-48100.herokuapp.com/order`)
   .then(result =>{
     setOrders(result.data)
   })
@@ -18,7 +18,7 @@ const ManageOrder = () => {
   const cancelHandle = (id) =>{
     const isDelete = window.confirm('are you sure ?')
     if(isDelete){
-      axios.delete(`http://localhost:5000/order/${id}`)
+      axios.delete(`https://fierce-escarpment-48100.herokuapp.com/order/${id}`)
     .then(result =>{
       const newOrders = orders.filter(order => order._id !== id);
       setOrders(newOrders)
@@ -28,7 +28,7 @@ const ManageOrder = () => {
   }
   
   const handleApprove = (id) =>{
-    axios.put(`http://localhost:5000/order/${id}`)
+    axios.put(`https://fierce-escarpment-48100.herokuapp.com/order/${id}`)
     .then(result =>{
       if(result.data.modifiedCount>0){
         setIsApprove(true)

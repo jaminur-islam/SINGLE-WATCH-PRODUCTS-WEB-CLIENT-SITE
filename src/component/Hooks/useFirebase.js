@@ -1,4 +1,4 @@
-import { getAuth, signOut, GoogleAuthProvider , signInWithPopup , onAuthStateChanged ,createUserWithEmailAndPassword , updateProfile , SignIn,signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signOut, GoogleAuthProvider , signInWithPopup , onAuthStateChanged ,createUserWithEmailAndPassword , updateProfile , getIdToken, signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from "react";
 import firebaseAuthenticationInit from "../firebase/firebase.init"
 firebaseAuthenticationInit();
@@ -7,6 +7,8 @@ const useFirebase = () =>{
   const [user , setUser] = useState({});
   const [loading , setLoading] = useState(true);
   const [isAdmin , setIsAdmin] = useState(false);
+  const [error , setError] = useState('')
+  const [token , setToken] = useState('')
 
 
 
@@ -25,7 +27,7 @@ const useFirebase = () =>{
       setUserDatabase('post' , name , email)
       history.push(`/home`)
     }).catch(error =>{ 
-      console.log(error)
+      setError(error.message)
     }).finally(()=>{
       setLoading(false)
     })
@@ -50,7 +52,7 @@ const useFirebase = () =>{
       console.log(locationis)
     })
     .catch(error =>{
-      console.log(error)
+      setError(error.message)
     })
     .finally(()=>{
       setLoading(false)
@@ -68,7 +70,7 @@ const useFirebase = () =>{
       setUserDatabase("PUT" , user.displayName, user.email);
        history.push(locationis)
     }).catch(error => {
-      console.log(error)
+      setError(error.message)
     }).finally(()=>{
       setLoading(false)
     })
@@ -81,7 +83,7 @@ const useFirebase = () =>{
      .then(()=>{
       setUser({})
      }).catch(error =>{
-
+      setError(error.message)
      }).finally(()=>{
        setLoading(false)
      })
@@ -92,6 +94,9 @@ const useFirebase = () =>{
  const unsubscrib = onAuthStateChanged(auth , user => {
       if(user){
         setUser(user)
+        getIdToken(user).then(idToken =>{
+          setToken(idToken)
+        })
       }else{
         setUser({})
       }
@@ -100,10 +105,11 @@ const useFirebase = () =>{
 
     return ()=> unsubscrib
   } , [])
+  console.log(error)
 
   // Get admin api
   useEffect(()=>{
-    fetch(`http://localhost:5000/user/${user?.email}`)
+    fetch(`https://fierce-escarpment-48100.herokuapp.com/user/${user?.email}`)
     .then(res => res.json())
     .then(result => {
       setIsAdmin(result)
@@ -114,7 +120,7 @@ const useFirebase = () =>{
   // set user on database 
   const setUserDatabase =(method , name , email) =>{
     const user = {name , email}
-    fetch('http://localhost:5000/user' , {
+    fetch('https://fierce-escarpment-48100.herokuapp.com/user' , {
       method : method,
       headers: {
         'content-type': 'application/json'
@@ -126,12 +132,9 @@ const useFirebase = () =>{
       console.log(result)
     })
   }
-  
-
-console.log(isAdmin)
 
   return {handleGoogleSign , 
-    user , logOut , loading ,signUp ,  logIn , isAdmin
+    user , logOut , loading ,signUp ,  logIn , isAdmin , token
   
   }
 }

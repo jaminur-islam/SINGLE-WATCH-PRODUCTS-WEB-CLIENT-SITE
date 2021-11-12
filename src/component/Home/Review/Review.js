@@ -8,7 +8,7 @@ const Review = () => {
   const [reviews , setReviews] = useState([]);
 
   useEffect(()=>{
-    axios('http://localhost:5000/review')
+    axios('https://fierce-escarpment-48100.herokuapp.com/review')
     .then(result=>{
       setReviews(result.data);
     })

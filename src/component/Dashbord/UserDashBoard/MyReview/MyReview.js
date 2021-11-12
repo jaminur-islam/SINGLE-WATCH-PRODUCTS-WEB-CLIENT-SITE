@@ -12,7 +12,7 @@ const MyReview = () => {
     data.img = user?.photoURL;
     data.name = user?.displayName;
     console.log(data);
-    axios.post('http://localhost:5000/review' , data)
+    axios.post('https://fierce-escarpment-48100.herokuapp.com/review' , data)
     .then(result => {
       reset()
       if(result?.data?.insertedId){

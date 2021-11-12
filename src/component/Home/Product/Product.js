@@ -17,7 +17,7 @@ const Product = ({ product , button , order , setIsDelete }) => {
   const handleProductDelete = (id) =>{
    const istrue = window.confirm('Are you sure you want to delete it?')
    if(istrue){
-    axios.delete(`http://localhost:5000/products/${id}`)
+    axios.delete(`https://fierce-escarpment-48100.herokuapp.com/products/${id}`)
     .then(result =>{
       console.log(result.data)
       setIsDelete(_id)
