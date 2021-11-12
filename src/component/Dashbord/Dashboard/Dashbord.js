@@ -27,14 +27,20 @@ import {
 import Pay from '../UserDashBoard/Pay/Pay';
 import Myorders from '../UserDashBoard/Myorders/Myorders';
 import MyReview from '../UserDashBoard/MyReview/MyReview';
+import AddProducts from '../AdminDashBoard/AddProducts/AddProducts';
+import MakeAdmin from '../AdminDashBoard/MakeAdmin/MakeAdmin';
+import ManageProducts from '../AdminDashBoard/ManageProducts/ManageProducts';
+import ManageOrder from '../AdminDashBoard/ManageOrder/ManageOrder';
+import ManageReview from '../AdminDashBoard/ManageReview/ManageReview';
+import AdminRoute from '../AdminRoute/AdminRoute';
+import useAuth from '../../Hooks/useAuth';
 
 
 const drawerWidth = 200;
 
 function Dashbord(props) {
-
+  const {user , isAdmin} = useAuth();
   let { path, url } = useRouteMatch();
-
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -42,34 +48,91 @@ function Dashbord(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const me = true;
   const drawer = (
     <div className='py-5' style={{backgroundColor: '#001a1a'}}>
-      <Link className='text-decoration-none fs-6 ms-2' to='/home'><i className="fas fa-angle-double-left"></i> Back to Home </Link>
-       <hr className='text-white' />
+      {
+        isAdmin && user.email && <div>
+        <Link className='text-decoration-none fs-6 ms-2' to='/home'><i className="fas fa-angle-double-left"></i> Back to Home </Link>
+         <hr className='text-white' />
+  
+         <Link 
+          to={`${url}`}
+          className='fs-6 text-warning  text-decoration-none d-flex align-items-center ms-3'
+          > 
+         <i className="fas fa-plus-square fs-3 me-3 text-success "></i>
+         Add A Product
+          </Link>
+         <Link 
+         to={`${url}/makeadmin`}
+          className='fs-6 text-decoration-none my-3 text-warning d-flex align-items-center ms-3'
+          > 
+         <i className="fas fa-user-shield  fs-3 me-3 text-danger"></i>
+         Make Admin
+          </Link>
+  
+         <Link 
+          to={`${url}/manageproducts`}
+          className='fs-6 text-warning text-decoration-none d-flex align-items-center ms-3'
+          > 
+         <i className="fas fa-swatchbook fs-3 me-3 text-info"></i>
+         Manage Products
+          </Link>
+  
+         <Link 
+          to={`${url}/manageorders`}
+          className='fs-6 text-warning text-decoration-none d-flex align-items-center ms-3 mt-3'
+          > 
+         <i className="fas fa-th-list fs-3 me-3" style={{color: '#EC5D07'}}></i>
+         Manage All Orders
+          </Link>
+         <Link 
+          to={`${url}/managereview`}
+          className='fs-6 text-warning text-decoration-none d-flex align-items-center ms-3 mt-3'
+          > 
+         <i className="fas fa-tools fs-3 me-3 text-primary"></i>
+         Manage Reviews
+          </Link>
 
-       <Link 
-        to={`${url}`}
-        className='fs-6 text-warning  text-decoration-none d-flex align-items-center ms-3'
-        > 
-       <i className="fas  fa-shopping-cart fs-3 me-3 text-success "></i>
-       My Orders
-        </Link>
 
-       <Link 
-       to={`${url}/pay`}
-        className='fs-6 text-decoration-none my-3 text-warning d-flex align-items-center ms-3'
-        > 
-       <i className="fas fa-comment-dollar  fs-3 me-3 text-danger"></i>
-       Pay
-        </Link>
+        </div>
+          
 
-       <Link 
-        to={`${url}/myreview`}
-        className='fs-6 text-warning text-decoration-none d-flex align-items-center ms-3'
-        > 
-       <i className="fas fa-star-half-alt fs-3 me-3 text-info"></i>
-       Give review 
-        </Link>
+      }
+
+         {
+            !isAdmin && user.email && 
+            <div>
+            <Link className='text-decoration-none fs-6 ms-2' to='/home'><i className="fas fa-angle-double-left"></i> Back to Home </Link>
+           <hr className='text-white' />
+    
+           <Link 
+            to={`${url}`}
+            className='fs-6 text-warning  text-decoration-none d-flex align-items-center ms-3'
+            > 
+           <i className="fas  fa-shopping-cart fs-3 me-3 text-success "></i>
+           My Orders
+            </Link>
+    
+           <Link 
+           to={`${url}/pay`}
+            className='fs-6 text-decoration-none my-3 text-warning d-flex align-items-center ms-3'
+            > 
+           <i className="fas fa-comment-dollar  fs-3 me-3 text-danger"></i>
+           Pay
+            </Link>
+    
+           <Link 
+            to={`${url}/myreview`}
+            className='fs-6 text-warning text-decoration-none d-flex align-items-center ms-3'
+            > 
+           <i className="fas fa-star-half-alt fs-3 me-3 text-info"></i>
+           Give review 
+            </Link>
+            </div>
+         }
+        
+      
     </div>
   );
 
@@ -84,7 +147,7 @@ function Dashbord(props) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
           backgroundColor: ' #003333',
-          color:'#e6ffcc'
+          color:'#e6ffcc',
           
         }}
       >
@@ -99,7 +162,7 @@ function Dashbord(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Dash Board 
+            DashBoard 
           </Typography>
         </Toolbar>
       </AppBar>
@@ -137,13 +200,15 @@ function Dashbord(props) {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{ flexGrow: 1 , mt: 2, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
         
-        <Switch>
-
-        <Route exact path={`${path}`}>
+        
+         {
+          !isAdmin && user.email &&<div>
+            <Switch>
+           <Route exact path={`${path}`}>
                  <Myorders></Myorders>
            </Route>
 
@@ -154,8 +219,42 @@ function Dashbord(props) {
            <Route path={`${path}/myreview`}>
              <MyReview></MyReview>
            </Route>
+           </Switch>
+           </div>
+         }
 
+           {/* Admin Dash board */}
+
+      {
+       isAdmin && user.email &&
+        <div>
+          <Switch>
+            <AdminRoute exact path={`${path}`}>
+          <AddProducts></AddProducts>
+        </AdminRoute>
+
+        <AdminRoute path={`${path}/makeadmin`}>
+          <MakeAdmin></MakeAdmin>
+        </AdminRoute>
+
+        <AdminRoute path={`${path}/manageproducts`}>
+          <ManageProducts></ManageProducts>
+        </AdminRoute>
+
+        <AdminRoute path={`${path}/manageorders`}>
+          <ManageOrder></ManageOrder>
+        </AdminRoute>
+
+        <AdminRoute path={`${path}/managereview`}>
+          <ManageReview></ManageReview>
+        </AdminRoute>
         </Switch>
+        </div>
+        
+      }
+
+
+        
         
         
       </Box>
@@ -172,30 +271,3 @@ export default Dashbord;
 
 
 
-
-              {/* 
-                 <li className="mt-2">
-                   <Link to="/add"> Manage All Orders </Link>
-                 </li>
-                 <li className="mt-2">
-                   <Link to="/manage"> Add A Product </Link>
-                 </li>
-                 <li className="mt-2">
-                   <Link to="/manage"> Make Admin </Link>
-                 </li>
-                 <li className="mt-2">
-                   <Link to="/manage"> Manage Products </Link>
-                 </li> */
-                 
-                 
-                    {/*  <li className="mt-2">
-                <Link to="/manage"> Pay </Link>
-              </li>
-
-              <li className="mt-2">
-                <Link to="/add"> My Orders </Link>
-              </li>
-
-              <li className="mt-2">
-                <Link to="/manage"> Review </Link>
-              </li> */}}

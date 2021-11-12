@@ -17,7 +17,8 @@ const Review = () => {
 const {email , comment , img} = reviews || {}
 
   return (
-    <div className='container my-5'>
+    <div>
+      <div className='container my-5'>
       <h1 className='my-3'> Customer review </h1>
         <div className='row'>
              {
@@ -44,6 +45,7 @@ const {email , comment , img} = reviews || {}
                })
              }
         </div>
+    </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ firebaseAuthenticationInit();
 const useFirebase = () =>{
   const [user , setUser] = useState({});
   const [loading , setLoading] = useState(true);
+  const [isAdmin , setIsAdmin] = useState(false);
 
 
 
@@ -45,7 +46,8 @@ const useFirebase = () =>{
     signInWithEmailAndPassword(auth , email , password)
     .then(result =>{
       console.log(result)
-      history.push(locationis)
+      history.replace(locationis)
+      console.log(locationis)
     })
     .catch(error =>{
       console.log(error)
@@ -99,6 +101,15 @@ const useFirebase = () =>{
     return ()=> unsubscrib
   } , [])
 
+  // Get admin api
+  useEffect(()=>{
+    fetch(`http://localhost:5000/user/${user?.email}`)
+    .then(res => res.json())
+    .then(result => {
+      setIsAdmin(result)
+    })
+  } ,[user.email])
+
 
   // set user on database 
   const setUserDatabase =(method , name , email) =>{
@@ -117,8 +128,11 @@ const useFirebase = () =>{
   }
   
 
+console.log(isAdmin)
 
-
-  return {handleGoogleSign , user , logOut , loading ,signUp ,  logIn}
+  return {handleGoogleSign , 
+    user , logOut , loading ,signUp ,  logIn , isAdmin
+  
+  }
 }
 export default useFirebase

@@ -27,7 +27,8 @@ const Myorders = () => {
 
   let num = 1;
   return(
-    <div className="table-responsive bg-dark p-5" style={{marginTop: '-20px'}} >
+   <div>
+      <div className="table-responsive bg-dark p-5 mt-2" style={{marginTop: '-20px'}} >
     <table className="table caption-top container " style={{backgroundColor:"#75a3a3" , borderRadius: '5px'}}>
       <caption className="fs-4 text-white">Your order list </caption>
       <thead>
@@ -76,6 +77,7 @@ const Myorders = () => {
       })}
     </table>
   </div>
+   </div>
   );
 };
 

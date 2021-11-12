@@ -4,7 +4,8 @@ import "./Banner.css";
 
 const Banner = () => {
   return (
-    <div
+  <div>
+      <div
       className="bg-primary d-flex justify-content-center align-items-center"
       style={{ height: "85vh" }}
     >
@@ -24,6 +25,7 @@ const Banner = () => {
         </div>
       </div>
     </div>
+  </div>
   );
 };
 

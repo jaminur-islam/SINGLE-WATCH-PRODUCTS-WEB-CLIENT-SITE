@@ -13,7 +13,13 @@ const Explore = () => {
        <div className='container'>
        <div className='row'>
        {
-         products.map(product => <Product key={product._id} product={product}></Product>)
+         products.map(product => <Product
+           key={product._id}
+            product={product}
+            order = {'order'}
+            >
+
+            </Product>)
        }
     </div>
        </div>

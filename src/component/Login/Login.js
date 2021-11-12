@@ -13,11 +13,11 @@ const Login = () => {
   const history = useHistory();
   const location = useLocation();
   const locationis = location?.state?.from || "/home";
-  console.log(locationis.pathname);
+  
 
   const onSubmit = (data) => {
     const { email, password } = data;
-    logIn(email, password);
+    logIn(email, password , history , locationis);
     reset();
   };
 

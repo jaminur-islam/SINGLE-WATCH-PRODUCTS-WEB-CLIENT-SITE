@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { useForm } from "react-hook-form";
 import useAuth from '../../../Hooks/useAuth';
+import '../../AdminDashBoard/AddProducts/AddProduct.css'
 
 const MyReview = () => {
   const {user} = useAuth();
@@ -18,14 +19,12 @@ const MyReview = () => {
         alert('Review successfully done')
       }
     })
-
- 
   } 
     return (
     <div className=''>
          <h2 className='text-center'> Give a review </h2>
          <hr className='w-25 mx-auto text-primary' />
-      <form className='d-flex flex-column w-50 mx-auto  ' onSubmit={handleSubmit(onSubmit)}>
+      <form className='d-flex flex-column  mx-auto' onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor='email' className='text-success'>Your email :  </label>
       <input type='email' className='my-2 p-2 form-control is-valid' defaultValue={user?.email} {...register("email")} />
       <label className='text-success' htmlFor='comment'>Your Comment :  </label>

@@ -9,7 +9,7 @@ import useAuth from "../../Hooks/useAuth";
 const Navigation = () => {
   const  {handleGoogleSign , user , logOut} = useAuth();
   return (
-    <nav className="navbar navbar-expand-lg navbar-light sticky-top full-nav  ">
+    <nav className="navbar navbar-expand-lg  navbar-light sticky-top full-nav">
       <div className="container text-center">
         <a
           className="navbar-brand fs-4 fw-bold text-uppercase text-success"
