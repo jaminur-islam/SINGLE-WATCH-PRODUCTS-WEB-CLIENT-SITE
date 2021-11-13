@@ -2,6 +2,7 @@ import React from "react";
 import Product from "../Home/Product/Product";
 import useProducts from "../Hooks/useProducts";
 import Navigation from "../Shared/Navigation/Navigation";
+import Footer from "../Home/Footer/Footer";
 
 const Explore = () => {
   const { products } = useProducts(
@@ -23,6 +24,7 @@ const Explore = () => {
           ))}
         </div>
       </div>
+      <Footer> </Footer>
     </div>
   );
 };

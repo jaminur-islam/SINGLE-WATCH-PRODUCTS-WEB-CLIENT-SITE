@@ -3,20 +3,24 @@ import { Link } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import { useHistory, useParams } from "react-router";
 import "../Login/Login.css";
+import { Alert } from "@mui/material";
 
 const Register = () => {
   const history = useHistory();
   const userLocation = useParams();
   console.log(userLocation);
 
-  const { signUp } = useAuth();
+  const { signUp, error } = useAuth();
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    const { name, email, password } = data;
-    signUp(name, email, password, history);
-    reset();
-    console.log(data);
+    if (data.password === data.password2) {
+      const { name, email, password } = data;
+      signUp(name, email, password, history);
+      reset();
+    } else {
+      alert("Your two password are not same...");
+    }
   };
 
   return (
@@ -58,7 +62,17 @@ const Register = () => {
             className="mt-2 mb-3 py-2"
             {...register("password2")}
           />
-
+          {error ? (
+            <Alert
+              variant="outlined"
+              sx={{ color: "#E1290F", border: "0" }}
+              severity="error"
+            >
+              {error}
+            </Alert>
+          ) : (
+            ""
+          )}
           <div className="d-flex justify-content-between mb-2">
             <Link to="/login">Already Have a Account ? </Link>
           </div>
