@@ -41,7 +41,7 @@ const Login = () => {
           <hr className="w-50 mx-auto" />
         </h1>
         <form
-          className="d-flex flex-column w mx-auto mt-4"
+          className="d-flex flex-column  mx-auto mt-4"
           onSubmit={handleSubmit(onSubmit)}
         >
           <input

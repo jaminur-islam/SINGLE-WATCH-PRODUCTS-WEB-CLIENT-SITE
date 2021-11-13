@@ -7,9 +7,6 @@ import FutureProducts from "../futureProducts/FutureProducts";
 import Products from "../Products/Products";
 import Review from "../Review/Review";
 
-/* // passs
-Watch-website
-7ilmYlFrOoxLNkMV */
 const Home = () => {
   return (
     <div>

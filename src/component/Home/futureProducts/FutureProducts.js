@@ -14,7 +14,7 @@ const FutureProducts = () => {
   const [productName, setProductName] = useState("apple");
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 container">
       <div className="row">
         <h2 className="text-center"> Best Seller </h2>
         <hr className="w-25 mx-auto" style={{ border: "2px solid #FF0040" }} />
