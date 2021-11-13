@@ -2,7 +2,7 @@ import useProducts from "../../Hooks/useProducts";
 import Product from "../Product/Product";
 
 const Products = () => {
- const {products} = useProducts();
+ const {products} = useProducts("https://fierce-escarpment-48100.herokuapp.com/products");
   
 
   return (

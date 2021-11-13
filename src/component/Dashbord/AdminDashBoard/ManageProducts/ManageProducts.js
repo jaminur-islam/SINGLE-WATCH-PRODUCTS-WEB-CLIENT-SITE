@@ -3,7 +3,7 @@ import useProducts from '../../../Hooks/useProducts';
 import Product from '../../../Home/Product/Product'
 
 const ManageProducts = () => {
-  const {products} = useProducts()
+  const {products} = useProducts("https://fierce-escarpment-48100.herokuapp.com/products")
   const [isDelete , setIsDelete] = useState('');
   
   const newProducts = products.filter(product => product._id !== isDelete)

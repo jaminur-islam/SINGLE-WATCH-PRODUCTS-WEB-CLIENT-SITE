@@ -4,7 +4,7 @@ import useProducts from '../Hooks/useProducts';
 import Navigation from '../Shared/Navigation/Navigation';
 
 const Explore = () => {
-  const {products} = useProducts();
+  const {products} = useProducts("https://fierce-escarpment-48100.herokuapp.com/products");
   return (
    <div>
      <Navigation></Navigation>
