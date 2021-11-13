@@ -1,16 +1,17 @@
 import React from "react";
 import "./footer.css";
-import img from '../../../img/logo.png'
+import img from "../../../img/logo.png";
 const Footer = () => {
   return (
-    <div>
+    <div id="contact">
       <div className=" main-container">
         <div className="container">
           <div className="row">
             <div className="col-lg-3">
               <div className="footer-container m-2">
                 <h5 className="mb-5">
-                  <img src={img} width='50' className='' alt="" /> <i className="name">SM</i>
+                  <img src={img} width="50" className="" alt="" />
+                  <i className="name">SM</i>
                   WAtCH
                 </h5>
                 <p>
@@ -98,8 +99,8 @@ const Footer = () => {
       </div>
       <div className="text-center fot">
         <span>
-        &copy; Copyright 2021 | BESTWEBSOFT | All Rights Reserved | Designed by
-         jaminur islam
+          &copy; Copyright 2021 | BESTWEBSOFT | All Rights Reserved | Designed
+          by jaminur islam
         </span>
       </div>
     </div>

@@ -1,12 +1,9 @@
-import { Link } from "@mui/material";
-import userEvent from "@testing-library/user-event";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Rating from "react-rating";
 import { useParams } from "react-router";
 import useAuth from "../Hooks/useAuth";
-import useFirebase from "../Hooks/useFirebase";
 import Navigation from "../Shared/Navigation/Navigation";
 
 const Order = () => {
@@ -15,17 +12,19 @@ const Order = () => {
   const [product, setProduct] = useState({});
   const { name, describiton, img, rating, _id } = product || {};
   useEffect(() => {
-    axios(`https://fierce-escarpment-48100.herokuapp.com/products/${id}`).then((result) => {
-      setProduct(result.data);
-      reset({
-        name: product.name,
-      });
-    });
+    axios(`https://fierce-escarpment-48100.herokuapp.com/products/${id}`).then(
+      (result) => {
+        setProduct(result.data);
+        reset({
+          name: product.name,
+        });
+      }
+    );
   }, []);
   const onSubmit = (data) => {
     data.userEamil = user.email;
     data.productId = _id;
-    data.status = 'pending';
+    data.status = "pending";
     console.log(data);
     fetch("https://fierce-escarpment-48100.herokuapp.com/order", {
       method: "POST",
@@ -109,7 +108,7 @@ const Order = () => {
                   />
                   <label htmlFor="name"> Your address : </label>
                   <input
-                   required
+                    required
                     type="text"
                     className="mb-2 py-1 px-3 disabled"
                     {...register("address")}
@@ -123,7 +122,7 @@ const Order = () => {
                   />
                   <label htmlFor="name"> Your number : </label>
                   <input
-                   required
+                    required
                     type="tel"
                     placeholder="Your Number *"
                     className="mb-2 py-1 px-3"

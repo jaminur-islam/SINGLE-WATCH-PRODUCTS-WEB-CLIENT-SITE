@@ -7,7 +7,7 @@ import "./Navigation.css";
 import useAuth from "../../Hooks/useAuth";
 
 const Navigation = () => {
-  const  {handleGoogleSign , user , logOut} = useAuth();
+  const { handleGoogleSign, user, logOut } = useAuth();
   return (
     <nav className="navbar navbar-expand-lg  navbar-light sticky-top full-nav">
       <div className="container text-center">
@@ -39,32 +39,35 @@ const Navigation = () => {
             <HashLink to="/home#products">Products</HashLink>
             <HashLink to="/explore">Explore</HashLink>
             <HashLink to="/home#contact">Contact</HashLink>
-            
-            {
-              user.email && <HashLink to="/dashboard">Dashbord</HashLink>
-            }
-            
-             </ul>
+
+            {user.email && <HashLink to="/dashboard">Dashbord</HashLink>}
+          </ul>
           <span className="mb-5 fw-bold"> 0 </span>
           <i className="fas text-success fa-shopping-cart fs-2 me-4 d-inline-block mt-2"></i>
-          {
-            user.email ? <button onClick={logOut} className='logOut-btn'> logOut </button>:<Link className="longin-btn text-white" to='/login'> Sign In </Link>
-          }
-          
-          {
-            user.email &&  <div
-            className="d-flex align-items-center ms-lg-5  ms-0   
+          {user.email ? (
+            <button onClick={logOut} className="logOut-btn">
+              logOut
+            </button>
+          ) : (
+            <Link className="longin-btn text-white" to="/login">
+              Sign In
+            </Link>
+          )}
+
+          {user.email && (
+            <div
+              className="d-flex align-items-center ms-lg-5  ms-0   
           flex-row-reverse flex-lg-row justify-content-center mt-lg-0 mt-2"
-          >
-            <span className="me-3 ms-lg-0 ms-3">{user.displayName}</span>
-            <img
-              style={{ height: "35px", width: "35px" }}
-              className="rounded-circle"
-              src={user.photoURL || profileimg}
-              alt=""
-            />
-          </div>
-          }
+            >
+              <span className="me-3 ms-lg-0 ms-3">{user.displayName}</span>
+              <img
+                style={{ height: "35px", width: "35px" }}
+                className="rounded-circle"
+                src={user.photoURL || profileimg}
+                alt=""
+              />
+            </div>
+          )}
         </div>
       </div>
     </nav>

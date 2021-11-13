@@ -1,143 +1,157 @@
-import { getAuth, signOut, GoogleAuthProvider , signInWithPopup , onAuthStateChanged ,createUserWithEmailAndPassword , updateProfile , getIdToken, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  getIdToken,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { useEffect, useState } from "react";
-import firebaseAuthenticationInit from "../firebase/firebase.init"
+import firebaseAuthenticationInit from "../firebase/firebase.init";
 firebaseAuthenticationInit();
 
-const useFirebase = () =>{
-  const [user , setUser] = useState({});
-  const [loading , setLoading] = useState(true);
-  const [isAdmin , setIsAdmin] = useState(false);
-  const [error , setError] = useState('')
-  const [token , setToken] = useState('')
-
-
+const useFirebase = () => {
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [error, setError] = useState("");
+  const [token, setToken] = useState("");
 
   // auth
   const auth = getAuth();
 
   // CreateUser
-  const signUp = (name , email , pass , history) =>{
-    console.log(name)
+  const signUp = (name, email, pass, history) => {
     setLoading(true);
-    createUserWithEmailAndPassword(auth , email , pass)
-    .then(result =>{
-      setError('')
-      console.log(result)
-      setUser({displayName: name , email: email })
-      updateuser(name)
-      setUserDatabase('post' , name , email)
-      history.push(`/home`)
-    }).catch(error =>{ 
-      setError(error.message)
-    }).finally(()=>{
-      setLoading(false)
-    })
-  }
-  
+    createUserWithEmailAndPassword(auth, email, pass)
+      .then((result) => {
+        setError("");
 
- // UpdateProfile
- const updateuser =(name)=>{
-  updateProfile(auth.currentUser ,{
-     displayName: name
-  })
- }
+        setUser({ displayName: name, email: email });
+        updateuser(name);
+        setUserDatabase("post", name, email);
+        history.push(`/home`);
+        alert("Create user successfully");
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
+  // UpdateProfile
+  const updateuser = (name) => {
+    updateProfile(auth.currentUser, {
+      displayName: name,
+    });
+  };
 
   // Login user
-  const logIn = (email , password , history , locationis) =>{
-    setLoading(true)
-    signInWithEmailAndPassword(auth , email , password)
-    .then(result =>{
-      console.log(result)
-      history.replace(locationis)
-      setError('')
-    })
-    .catch(error =>{
-      setError(error.message)
-    })
-    .finally(()=>{
-      setLoading(false)
-    })
-  }
+  const logIn = (email, password, history, locationis) => {
+    setLoading(true);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        history.replace(locationis);
+        setError("");
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
-
-  // googleProvider 
+  // googleProvider
   const googleProvider = new GoogleAuthProvider();
-  const handleGoogleSign = (locationis , history) =>{
-    setLoading(true)
-    signInWithPopup(auth , googleProvider)
-    .then(result =>{
-      const user = result.user;
-      setUserDatabase("PUT" , user.displayName, user.email);
-      setError('')
-       history.push(locationis)
-    }).catch(error => {
-      setError(error.message)
-    }).finally(()=>{
-      setLoading(false)
-    })
-  }
+  const handleGoogleSign = (locationis, history) => {
+    setLoading(true);
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const user = result.user;
+        setUserDatabase("PUT", user.displayName, user.email);
+        setError("");
+        history.push(locationis);
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
-  // Logout 
-  const logOut = () =>{
-    setLoading(true)
-     signOut(auth)
-     .then(()=>{
-      setUser({})
-     }).catch(error =>{
-      setError(error.message)
-     }).finally(()=>{
-       setLoading(false)
-     })
-  }
+  // Logout
+  const logOut = () => {
+    setLoading(true);
+    signOut(auth)
+      .then(() => {
+        setUser({});
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   // userHandle
-  useEffect(()=>{
- const unsubscrib = onAuthStateChanged(auth , user => {
-      if(user){
-        setUser(user)
-        getIdToken(user).then(idToken =>{
-          setToken(idToken)
-        })
-      }else{
-        setUser({})
+  useEffect(() => {
+    const unsubscrib = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+        getIdToken(user).then((idToken) => {
+          setToken(idToken);
+        });
+      } else {
+        setUser({});
       }
-      setLoading(false)
-    })
+      setLoading(false);
+    });
 
-    return ()=> unsubscrib
-  } , [])
-
+    return () => unsubscrib;
+  }, []);
 
   // Get admin api
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`https://fierce-escarpment-48100.herokuapp.com/user/${user?.email}`)
-    .then(res => res.json())
-    .then(result => {
-      setIsAdmin(result)
-    })
-  } ,[user.email])
+      .then((res) => res.json())
+      .then((result) => {
+        setIsAdmin(result);
+      });
+  }, [user.email]);
 
-
-  // set user on database 
-  const setUserDatabase =(method , name , email) =>{
-    const user = {name , email}
-    fetch('https://fierce-escarpment-48100.herokuapp.com/user' , {
-      method : method,
+  // set user on database
+  const setUserDatabase = (method, name, email) => {
+    const user = { name, email };
+    fetch("https://fierce-escarpment-48100.herokuapp.com/user", {
+      method: method,
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json",
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(user),
     })
-    .then(res=> res.json())
-    .then(result => {
-      // console.log(result)
-    })
-  }
+      .then((res) => res.json())
+      .then((result) => {});
+  };
 
-  return {handleGoogleSign , 
-    user , logOut , loading ,signUp ,  logIn , isAdmin , token ,error 
-  
-  }
-}
-export default useFirebase
+  return {
+    handleGoogleSign,
+    user,
+    logOut,
+    loading,
+    signUp,
+    logIn,
+    isAdmin,
+    token,
+    error,
+    setIsAdmin,
+  };
+};
+export default useFirebase;
