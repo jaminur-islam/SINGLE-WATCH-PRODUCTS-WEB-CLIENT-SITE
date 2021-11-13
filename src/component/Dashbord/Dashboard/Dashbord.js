@@ -24,12 +24,14 @@ import ManageOrder from '../AdminDashBoard/ManageOrder/ManageOrder';
 import ManageReview from '../AdminDashBoard/ManageReview/ManageReview';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import useAuth from '../../Hooks/useAuth';
+import imgProfile from '../../../img/profileimg.png'
 
 
 const drawerWidth = 210;
 
 function Dashbord(props) {
   const {user , isAdmin , loading} = useAuth();
+  console.log(user)
   let { path, url } = useRouteMatch();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -38,13 +40,21 @@ function Dashbord(props) {
     setMobileOpen(!mobileOpen);
   };
   const drawer = (
-    <div className='py-5' style={{backgroundColor: '#001a1a'}}>
+    <div className='py-3' style={{backgroundColor: '#001a1a'}}>
       {
         isAdmin && user.email && <div>
-        <Link className='text-decoration-none fs-6 ms-2 ' to='/home'><i className="fas fa-angle-double-left"></i> Back to Home </Link>
-         <hr className='text-white' />
+        <div className='text-center text-secondary'>
+        <img
+              style={{ height: "35px", width: "35px" }}
+              className="rounded-circle  mx-auto mb-1"
+              src={user.photoURL || imgProfile }
+              alt=""
+            />
+            <p style={{margin: '0'}}>{user.displayName} (Admin)</p>
+            <p style={{fontSize: '15px'}}>{user?.email}</p>
+        </div>
          
-
+         <hr className='text-white' />
          <Link 
           to={`${url}`}
           className='fs-6 text-warning text-decoration-none d-flex align-items-center ms-3 mt-3'
@@ -84,11 +94,13 @@ function Dashbord(props) {
          Manage Reviews
           </Link>
 
+          <Link className='text-decoration-none fs-6 ms-3 mt-3 text-success d-inline-block ' to='/home'><i className="fas fa-angle-double-left"></i> Back to Home </Link>
+
 
         </div>
           
 
-      }
+      } 
 
          {
             !isAdmin && user.email && 

@@ -131,7 +131,7 @@ const useFirebase = () =>{
     })
     .then(res=> res.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
     })
   }
 
