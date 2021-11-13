@@ -6,7 +6,7 @@ const Products = () => {
   
 
   return (
-   <div style={{marginTop: '100px'}}>
+   <div style={{marginTop: '100px' ,backgroundColor: '#BDE4D6 ', padding: '10px 0'}}>
       <div className="container"  id='products'>
       <h2 className='text-center'> Hot Deal Products </h2>
        <hr className='w-25 mx-auto' style={{border: '2px solid #FF0040'}} />

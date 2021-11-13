@@ -29,8 +29,10 @@ const Product = ({ product , button , order , setIsDelete }) => {
   
     return (
     <div className="col-lg-4">
-      <div className='text-center p-lg-3 m-lg-3 my-3'>
-        <img className='rounded' width='300' height='300' src={img} alt="" />
+      <div className='text-center p-lg-3 m-lg-3 my-3' style={{height: '500px'}}>
+        <img className='rounded'
+        style={{backgroundColor: '#111E1A' , padding: '10px'}}
+        height='200' src={img} alt="" />
          <h5 className='text-success mt-2'>{name}</h5>
          <h6 className='text-primary mt-2'> $ {price}</h6>
          <h6 style={{fontSize: '13px'}}>
