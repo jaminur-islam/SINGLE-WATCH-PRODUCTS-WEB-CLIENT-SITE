@@ -3,11 +3,12 @@
 This site has been created HTML, css, bootstrap, @mui ,react [ visit now ](https://watch-website-70dc3.web.app/)
 
 ### You can do all that from our web site
-*Of course, you have to log in to our website to do something, otherwise, you will not see much
-*This is a website that users can easily use. And admin can easily maintain. If you want admin, you can easily delete and add any product.
-*All the data of the website has been loaded from the MongoDB database. Users can order
+
+* Of course, you have to log in to our website to do something, otherwise, you will not see much
+* This is a website that users can easily use. And admin can easily maintain. If you want admin, you can easily delete and add any product.
+* All the data of the website has been loaded from the MongoDB database. Users can order
  if they want, they can cancel the order 
-*Admin will be able to see all the orders, can cancel any order. And he can delete reviews, add products very easily
+* Admin will be able to see all the orders, can cancel any order. And he can delete reviews, add products very easily
 * If you log in as a user, you can see the user's things. And if you log in as admin, you will be able to see the things of admin. If you want to login as admin [admin@admin.com] pass (123456)
 * If you log in as admin, you will be able to see all the orders, you can delete any order you want, you can delete any review.
 * You can add as many products as you want to the website.
